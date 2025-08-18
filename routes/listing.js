@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const router = express.Router();
 const wrapAsync = require('../utils/wrapAsync.js');
@@ -8,7 +10,14 @@ const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 const listingController = require("../controllers/listings.js")
 const multer  = require('multer')
 const {storage} = require("../cloudConfig.js")
+const filterListingController = require("../controllers/filterlistings.js");
 const upload = multer({ storage })
+
+  // in routes/listings.js
+router.get("/category/:categoryName", wrapAsync(filterListingController.filteredByCategory));
+// Search by location
+router.post("/search", wrapAsync(filterListingController.filteredByLocation));
+
 router
   .route('/')
   .get( wrapAsync(listingController.index))
@@ -18,6 +27,7 @@ router
     validateListing,
     wrapAsync(listingController.createListing)
   );
+
 
  
 //New Route
@@ -35,6 +45,8 @@ router
 
 //Edit Route
 router.get("/:id/edit",isLoggedIn,isOwner,  wrapAsync(listingController.renderEditForm));
+
+
 
 
 module.exports = router;

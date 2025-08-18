@@ -22,6 +22,7 @@ const User = require('./models/user.js');
 const listingRouter = require('./routes/listing.js');
 const reviewRouter = require('./routes/review.js');
 const userRouter = require('./routes/user.js');
+const router = express.Router();
 
 
 app.engine('ejs', ejsMate);
@@ -81,19 +82,26 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/", (req, res) => {
-  res.redirect("/listings");
-});
 
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
+  //  res.locals.currUser = req.user || null; 
   next();
 });
 
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
+
+
 app.use('/listings', listingRouter);
 app.use('/listings/:id/reviews', reviewRouter);
+// app.get("/listings/category/:categoryName", listingController.filteredByCategory);
+// app.post("/search",listingController.filteredByLocation);
+
 app.use('/', userRouter);
 
 app.all("*",(req,res,next)=>{
@@ -107,6 +115,6 @@ app.use((err, req, res, next)=>{
 
 const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0',  () => {
   console.log(`Server is listening on port ${PORT}`);
 });

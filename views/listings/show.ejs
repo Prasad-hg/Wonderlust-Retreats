@@ -1,4 +1,38 @@
 <%- layout('/layouts/boilerplate')-%>
+<style>
+  /* For mobile screens */
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  /* Containers that use col-8 offset-3 (title, review form, map) */
+  .col-8.offset-3,
+  .col-8.offset-3.mb-3 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* The big listing card at the top */
+  .card.col-6.offset-3.show-card.listing-card, /* <- no spaces */
+  .listing-card { /* simpler: this alone is enough if unique */
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* Each review card (the ones inside “All Reviews”) */
+  .card.col-5.ms-3.mb-3 {
+    width: 100% !important;         /* use 50% if you want two per row */
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+
+</style>
 <script>
   const mapToken ="<%= process.env.MAP_TOKEN %>";
   const listing = JSON.parse('<%- JSON.stringify(listing) %>');
@@ -6,10 +40,14 @@
 </script>
  <div class="row mt-3">
   <div class="col-8 offset-3"> 
+    <!-- <div class="col-12 col-md-8 offset-md-2"> -->
+
 
     <h3><%=listing.title%></h3>
     </div>
     <div class="card col-6 offset-3 show-card listing-card">
+      <!-- <div class="card col-12 col-md-6 offset-md-3 show-card listing-card"> -->
+
       <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing_image">
         <div class="card-body">
         <p class="card-text">Owned by <i><%= listing.owner.username%></i></p>
@@ -33,8 +71,9 @@
         </form>
     </div>
    <% } %>
-   
-    <div class="col-8 offset-3">
+   <div class="col-8 offset-3"> 
+<!-- <div class="col-12 col-md-8 offset-md-2"> -->
+
       <% if (currUser) {%>
         <hr>
       <h4> Leave a Review</h4>
