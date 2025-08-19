@@ -119,9 +119,11 @@
     </a>
 
     <!-- Hamburger (Mobile) -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+    <i class="fa-solid fa-bars"></i>   <!-- Hamburger icon -->
+    <i class="fa-solid fa-xmark d-none"></i> <!-- Close icon -->
+  </button>
+
 
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -192,4 +194,13 @@
   </div>
 </div> 
 
-  
+<script>
+  const toggler = document.querySelector('.navbar-toggler');
+  const barsIcon = toggler.querySelector('.fa-bars');
+  const closeIcon = toggler.querySelector('.fa-xmark');
+
+  toggler.addEventListener('click', () => {
+    barsIcon.classList.toggle('d-none');
+    closeIcon.classList.toggle('d-none');
+  });
+</script>

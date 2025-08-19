@@ -1,4 +1,5 @@
 # Wonderlust-Retreats
+🌍 Wanderlust – Find, List & Explore Unique Stays
 Wonderlust Rentals is a seamless platform connecting users to verified rentals, from vacation homes to vehicles and workspaces. With secure transactions, instant bookings, and smart search filters, it makes renting easy and hassle-free. Explore, book, and enjoy a smooth rental experience!
 
 
